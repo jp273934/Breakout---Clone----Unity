@@ -32,9 +32,12 @@ public class Ball : MonoBehaviour
             rb.linearVelocity = new Vector2(1, 1) * moveSpeed * Time.deltaTime;
         }
 
-       if(collision.gameObject.name == "Ceiling")
+       if(collision.gameObject.tag == "Brick")
         {
+            Debug.Log("brick was hit");
+            var brick = collision.gameObject;
 
+            Destroy(brick);
         }
     }
 }
