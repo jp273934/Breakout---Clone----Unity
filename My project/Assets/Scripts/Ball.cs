@@ -28,13 +28,11 @@ public class Ball : MonoBehaviour
     {
        if(collision.gameObject.name == "Paddle")
         {
-            Debug.Log("Paddle was hit");
             rb.linearVelocity = new Vector2(1, 1) * moveSpeed * Time.deltaTime;
         }
 
        if(collision.gameObject.tag == "Brick")
         {
-            Debug.Log("brick was hit");
             var brick = collision.gameObject;
 
             Destroy(brick);
