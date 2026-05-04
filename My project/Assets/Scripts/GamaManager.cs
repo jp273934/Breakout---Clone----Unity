@@ -7,14 +7,21 @@ public class GamaManager : MonoBehaviour
     public Transform spawnPoint;
     public Ball ball;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI totalBallText;
+    public bool IsGameOver { get; set; }
 
     private int score;
+    private int totalBalls;
     private bool isBallLaunched;
+
     void Start()
     {
         isBallLaunched = false;
         score = 0;
         scoreText.text = "Score : " + score;
+        totalBalls = 3;
+        totalBallText.text = "Balls : " + totalBalls;
+        IsGameOver = false;
     }
 
     // Update is called once per frame
@@ -30,9 +37,20 @@ public class GamaManager : MonoBehaviour
 
     public void RespawnBall()
     {
-        Instantiate(ball);
-        ball.transform.position = spawnPoint.position;
-        Debug.Log("ball was respawned");
+        if(totalBalls > 0)
+        {
+            Instantiate(ball);
+            ball.transform.position = spawnPoint.position;
+            totalBalls -= 1;
+            totalBallText.text = "Balls : " + totalBalls;
+        }
+        else
+        {
+            IsGameOver = true;
+        }
+       
+
+        
     }
 
     public void UpdateScore()

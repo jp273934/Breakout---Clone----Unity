@@ -5,6 +5,7 @@ public class Paddle : MonoBehaviour
 {
     public int moveSpeed;
     private Rigidbody2D rb;
+    private GamaManager gamaManager;
 
     public Paddle()
     {
@@ -15,17 +16,18 @@ public class Paddle : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        gamaManager = FindAnyObjectByType<GamaManager>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(Keyboard.current.leftArrowKey.isPressed && transform.position.x > -6)
+        if(Keyboard.current.leftArrowKey.isPressed && transform.position.x > -6 && gamaManager.IsGameOver == false)
         {
             transform.position -= transform.right * moveSpeed * Time.deltaTime;
         }
 
-        if(Keyboard.current.rightArrowKey.isPressed && transform.position.x < 6)
+        if(Keyboard.current.rightArrowKey.isPressed && transform.position.x < 6 && gamaManager.IsGameOver == false)
         {
            transform.position += transform.right * moveSpeed * Time.deltaTime;
         }  
