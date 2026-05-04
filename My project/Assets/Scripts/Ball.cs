@@ -42,6 +42,8 @@ public class Ball : MonoBehaviour
             var brick = collision.gameObject;
 
             Destroy(brick);
+
+            gamaManager.UpdateScore();
         }
     }
 
