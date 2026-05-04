@@ -1,16 +1,17 @@
 using System;
+using UnityEditor.Build.Content;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
     public int moveSpeed;
-    public Transform spawnPoint;
     private Rigidbody2D rb;
-
+    private GamaManager gamaManager;
     private void Awake()
     {
         moveSpeed = 200;
         rb = GetComponent<Rigidbody2D>();
+        gamaManager = FindAnyObjectByType<GamaManager>();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,6 +23,11 @@ public class Ball : MonoBehaviour
     void Update()
     {
        // transform.Translate(Vector2.up * moveSpeed * Time.deltaTime); 
+    }
+
+    public void LaunchBall()
+    {
+        rb.linearVelocity = new Vector2(1, 1) * moveSpeed * Time.deltaTime;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -43,7 +49,7 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.tag == "OutOfBounds")
         {
-           transform.position = this.spawnPoint.position;
+            gamaManager.RespawnBall();
         }
     }
 }
