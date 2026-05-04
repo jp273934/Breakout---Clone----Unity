@@ -4,7 +4,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public int moveSpeed;
-
+    public Transform spawnPoint;
     private Rigidbody2D rb;
 
     private void Awake()
@@ -36,6 +36,14 @@ public class Ball : MonoBehaviour
             var brick = collision.gameObject;
 
             Destroy(brick);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "OutOfBounds")
+        {
+           transform.position = this.spawnPoint.position;
         }
     }
 }

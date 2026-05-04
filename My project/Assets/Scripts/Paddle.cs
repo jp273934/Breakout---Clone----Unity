@@ -28,10 +28,6 @@ public class Paddle : MonoBehaviour
         if(Keyboard.current.rightArrowKey.isPressed && transform.position.x < 6)
         {
            transform.position += transform.right * moveSpeed * Time.deltaTime;
-        }
-
-       
-
-        
+        }  
     }
 }
